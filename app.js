@@ -347,10 +347,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Handle Play/Pause UI Button
+  // Handle Play/Pause UI Button with robust Mobile/iOS Web Audio Unlocking
   const audioBtn = document.getElementById('audio-toggle-btn');
-  audioBtn.addEventListener('click', () => {
+  
+  function handleAudioToggle(e) {
+    if (e) {
+      // Prevent standard click emulation if it's a touchstart event to avoid double-activation
+      if (e.type === 'touchstart') {
+        e.preventDefault();
+      }
+    }
+    
     initAudio();
+    
+    // Explicitly and synchronously resume context inside the user interaction event stack
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().then(() => {
+        console.log('AudioContext successfully resumed on user gesture.');
+      }).catch(err => {
+        console.error('Failed to resume AudioContext:', err);
+      });
+    }
     
     if (state.audioPlaying) {
       // Pause
@@ -369,11 +386,26 @@ document.addEventListener('DOMContentLoaded', () => {
       audioBtn.querySelector('i').setAttribute('data-lucide', 'volume-2');
       if (typeof lucide !== 'undefined') lucide.createIcons();
       
-      startBackgroundLullaby();
+      // 1. Play chime synchronously in this call stack to fully unlock the audio output on iOS/Android
       playChime(1.2);
+      
+      // 2. Start the background intervals/loops
+      startBackgroundLullaby();
       if (state.cozyModeActive) startRainSynth();
     }
-  });
+  }
+
+  audioBtn.addEventListener('click', handleAudioToggle);
+  audioBtn.addEventListener('touchstart', handleAudioToggle, { passive: false });
+
+  // Infallible auto-resume fail-safe for mobile browsers (re-activates audio if suspended on subsequent taps)
+  const autoResumeAudio = () => {
+    if (state.audioPlaying && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
+  };
+  window.addEventListener('click', autoResumeAudio, { passive: true });
+  window.addEventListener('touchstart', autoResumeAudio, { passive: true });
 
   /* ==========================================================================
      CANVAS PARTICLE ENGINE (Hearts, Sparkles, Fireflies)
