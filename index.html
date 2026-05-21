@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A warm, dreamy, comforting space built with love to bring a smile to your face. You are safe, loved, and never alone.">
+  <title>Your Little Safe World 🌷🧸</title>
+  
+  <!-- Google Fonts for Cute, Handwritten Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Poppins:wght@300;400;600&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons for Cute Interface Elements -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Custom Sparkle/Heart Particle Canvas for Trails and Explosions -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Ambient Sound Control -->
+  <div class="audio-control-container">
+    <button id="audio-toggle-btn" class="audio-btn" aria-label="Toggle Sound">
+      <i data-lucide="music"></i>
+      <span>Play Soothing Music</span>
+    </button>
+  </div>
+
+  <!-- Main Container -->
+  <main class="app-container">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="clouds-container">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+      </div>
+      
+      <div class="hero-content">
+        <div class="love-note-container">
+          <div class="love-note">
+            <span class="note-tag">For my favorite person 🌷</span>
+            <h1 class="love-note-greeting">Hey my lambu cutuuu...</h1>
+            <p class="love-note-body">
+              This little world was made just for you. Whenever things feel a bit heavy or the world gets too loud, come here. You never have to carry everything alone. Let's take a deep breath together. 💗
+            </p>
+            <div class="teddy-inline-container">
+              <div class="teddy-inline-badge">
+                <span class="inline-teddy-hand">👋</span>
+                <span>Your teddy is waiting below!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-interactive">
+          <div class="main-teddy-container">
+            <img src="assets/teddy_hug.png" alt="Cute Teddy Bear offering a hug" class="teddy-img breathing">
+            <div class="sparkles-container">
+              <div class="star-sparkle" style="top: 10%; left: 20%;">✨</div>
+              <div class="star-sparkle" style="top: 40%; right: 15%;">✨</div>
+              <div class="star-sparkle" style="bottom: 10%; left: 30%;">✨</div>
+            </div>
+          </div>
+          <button id="hero-hug-btn" class="btn-primary bounce-on-hover">
+            <span>Tap for a hug</span>
+            <span class="btn-icon">🧸</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <span>Scroll to explore your garden</span>
+        <i data-lucide="chevron-down" class="chevron-bounce"></i>
+      </div>
+    </section>
+
+    <!-- TULIP GARDEN SECTION -->
+    <section class="garden-section" id="garden">
+      <div class="section-header">
+        <span class="section-badge">🌷 Interactive Garden</span>
+        <h2 class="section-title">Tap the Tulips to Bloom</h2>
+        <p class="section-subtitle">Each flower holds a gentle, comforting reminder written just for you.</p>
+      </div>
+
+      <div class="tulip-grid">
+        <!-- Tulip 1 -->
+        <div class="tulip-card" data-message="I am so incredibly proud of you.
+Even on the days when everything feels too heavy and you think you’re not doing enough, just making it through is already something to be proud of.
+
+You don’t have to carry every thought and every sadness alone, okay?
+I’m here for you — on the messy days, the quiet days, and the days when you don’t even know what to say, . 🧸">
+          <div class="tulip-flower">
+            <div class="stem"></div>
+            <div class="leaves"></div>
+            <div class="bloom tulip-pink">
+              <div class="petal petal-left"></div>
+              <div class="petal petal-center"></div>
+              <div class="petal petal-right"></div>
+            </div>
+          </div>
+          <span class="tulip-label">Tap me 💗</span>
+        </div>
+
+        <!-- Tulip 2 -->
+        <div class="tulip-card" data-message="You deserve the most gentle, patient, and unconditional love. You don't have to earn it, and you don't have to be perfect. You are completely enough just as you are. 🌸">
+          <div class="tulip-flower">
+            <div class="stem"></div>
+            <div class="leaves"></div>
+            <div class="bloom tulip-peach">
+              <div class="petal petal-left"></div>
+              <div class="petal petal-center"></div>
+              <div class="petal petal-right"></div>
+            </div>
+          </div>
+          <span class="tulip-label">Tap me 🌷</span>
+        </div>
+
+        <!-- Tulip 3 -->
+        <div class="tulip-card" data-message="It is completely okay to rest. The world can wait. Close your eyes, let go of your worries, and let me hold the weight of things for a little while. I'm right here. 🛌">
+          <div class="tulip-flower">
+            <div class="stem"></div>
+            <div class="leaves"></div>
+            <div class="bloom tulip-lavender">
+              <div class="petal petal-left"></div>
+              <div class="petal petal-center"></div>
+              <div class="petal petal-right"></div>
+            </div>
+          </div>
+          <span class="tulip-label">Tap me ☁️</span>
+        </div>
+
+        <!-- Tulip 4 -->
+        <div class="tulip-card" data-message="Your smile is my absolute favorite thing in the entire universe.
+It lights up everything around me.
+But if you can't smile today, that's okay too.
+I’ll still stay beside you through the tears and remind you that you don’t have to face everything alone.
+. 💕">
+          <div class="tulip-flower">
+            <div class="stem"></div>
+            <div class="leaves"></div>
+            <div class="bloom tulip-rose">
+              <div class="petal petal-left"></div>
+              <div class="petal petal-center"></div>
+              <div class="petal petal-right"></div>
+            </div>
+          </div>
+          <span class="tulip-label">Tap me ✨</span>
+        </div>
+
+        <!-- Tulip 5 -->
+        <div class="tulip-card" data-message="You are so incredibly strong, but you don't have to be strong all the time. It is okay to feel vulnerable, to cry, and to let it all out. I will catch every single tear. 🥺">
+          <div class="tulip-flower">
+            <div class="stem"></div>
+            <div class="leaves"></div>
+            <div class="bloom tulip-red">
+              <div class="petal petal-left"></div>
+              <div class="petal petal-center"></div>
+              <div class="petal petal-right"></div>
+            </div>
+          </div>
+          <span class="tulip-label">Tap me 💝</span>
+        </div>
+
+        <!-- Tulip 6 -->
+        <div class="tulip-card" data-message="No matter what happens, or where life takes us,
+I promise I’ll always be here for you — cheering for you, listening to you, and standing beside you through all the highs and lows.
+
+You’ve become such a special part of my life, and I hope you never forget that.
+And even on your hardest days, you’ll never have to face them alone while I’m around. 🤍
+">
+          <div class="tulip-flower">
+            <div class="stem"></div>
+            <div class="leaves"></div>
+            <div class="bloom tulip-cream">
+              <div class="petal petal-left"></div>
+              <div class="petal petal-center"></div>
+              <div class="petal petal-right"></div>
+            </div>
+          </div>
+          <span class="tulip-label">Tap me 🧸</span>
+        </div>
+      </div>
+
+      <!-- Letter Display Box -->
+      <div id="garden-letter-modal" class="letter-modal hidden">
+        <div class="letter-content glassmorphism">
+          <button class="close-letter-btn" aria-label="Close Note"><i data-lucide="x"></i></button>
+          <div class="letter-body">
+            <p id="letter-text"></p>
+          </div>
+          <div class="letter-footer">🌷 Stamped with endless care and adoration</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COZY MEMORY STARS (NIGHT SKY) -->
+    <section class="sky-section" id="sky">
+      <div class="sky-overlay"></div>
+      <div class="section-header">
+        <span class="section-badge sky-badge">⭐ Cozy Night Sky</span>
+        <h2 class="section-title sky-title">Touch the Wishing Stars</h2>
+        <p class="section-subtitle sky-subtitle">Each star holds a promise, a sweet memory, or a little dream for our future.</p>
+      </div>
+
+      <div class="sky-map" id="starry-sky">
+        <!-- Stars will be dynamically generated by JS, or styled nicely -->
+        <div class="interactive-star star-1" data-message="You don’t have to be okay all the time, even if you’re used to acting like you are.
+
+If today feels heavy, it’s fine to slow down and just exist for a bit.
+No pressure to fix anything or explain everything.
+
+I’m here, quietly cheering for you and hoping your day feels a little softer soon. 🤍"></div>
+        <div class="interactive-star star-2" data-message="I promise to always listen to you, even when you're speaking in quiet whispers or when you don't know how to put your feelings into words. 🗣️❤️"></div>
+        <div class="interactive-star star-3" data-message="You’re honestly the cutest mix of chaos and sweetness I’ve ever come across.
+A little clumsy, a little all over the place… like a tiny squirrel running around with too much energy 😭
+
+But that’s exactly what makes you so adorable.
+Even when you’re being forgetful or messy, there’s something about you that just feels warm and easy to smile at.
+
+You don’t even try to be cute — it just naturally happens, and that’s the dangerous part. 🤍
+"></div>
+        <div class="interactive-star star-4" data-message="You have the most beautiful heart I have ever known. Your kindness, your laughter, and your gentle soul inspire me to be a better person for you  every day. 🌟"></div>
+        <div class="interactive-star star-5" data-message="Whenever you feel lost in the dark, remember that my care  for you is a constant light, shining warmly to guide you back home. 🕯️💖"></div>
+        <div class="interactive-star star-6" data-message="I love every little detail about you—from the way your eyes light up when you're happy, to the gentle way you breathe when you're fast asleep. You are perfect.isliye kabhi khudke upar doubt mat karna samjhi .. 💤"></div>
+      </div>
+
+      <div id="sky-star-message" class="star-message-box glassmorphism hidden">
+        <p id="star-message-text"></p>
+        <span class="star-sparkle-mini">⭐</span>
+      </div>
+    </section>
+
+    <!-- CAROUSEL SECTION: Reasons I Love You -->
+    <section class="carousel-section" id="reasons">
+      <div class="section-header">
+        <span class="section-badge">💌 Soft Polaroids</span>
+        <h2 class="section-title">yeh padh lena before you feel insecure about yourself</h2>
+        <p class="section-subtitle">Swipe or drag through these fluffy plush toy notes to see why you are so special.</p>
+      </div>
+
+      <div class="carousel-outer">
+        <div class="carousel-inner" id="polaroid-carousel">
+          
+          <div class="polaroid-card">
+            <div class="polaroid-pin">📌</div>
+            <div class="polaroid-photo text-card-1">
+              <span class="polaroid-heart">🧸</span>
+              <p class="polaroid-text">I hope you don’t sit there overthinking things about yourself.
+The way you see yourself in your low moments is never the full truth.
+
+You don’t need to compare yourself to anyone or try to “fix” who you are.
+The little quirks, the clumsy moments, the soft personality — they’re not flaws, they’re just you.</p>
+            </div>
+            <div class="polaroid-caption"> </div>
+          </div>
+
+          <div class="polaroid-card">
+            <div class="polaroid-pin">📌</div>
+            <div class="polaroid-photo text-card-2">
+              <span class="polaroid-heart">🌷</span>
+              <p class="polaroid-text">Let me tell you this — you’re genuinely a really good person.
+Please don’t start blaming your kismat or yourself for things that went wrong.
+
+Sometimes people are just not right for us, that’s it.
+That doesn’t reduce your worth even a little bit.
+
+And please don’t let a few wrong or “manoos” people make you doubt yourself..</p>
+            </div>
+            <div class="polaroid-caption"></div>
+          </div>
+
+          
+
+          
+
+          <div class="polaroid-card">
+            <div class="polaroid-pin">📌</div>
+            <div class="polaroid-photo text-card-5">
+              <span class="polaroid-heart">🧸</span>
+              <p class="polaroid-text">I just want you to know something simple.
+I’ll always try to treat you right, in the way you deserve to be treated.
+
+And I won’t let you sit alone in your thoughts and mess yourself up over things that aren’t your fault.
+If you’re overthinking or doubting yourself, I’ll be there to pull you back to reality gently.
+
+You don’t have to figure everything out alone — I’ve got you in that way. 🤍
+.</p>
+            </div>
+            <div class="polaroid-caption">YAAD RAKHNA YEH SAMJHI HUMPPP 😤</div>
+          </div>
+
+        </div>
+      </div>
+      
+      <div class="carousel-indicators">
+        <span class="indicator active" data-index="0"></span>
+        <span class="indicator" data-index="1"></span>
+        <span class="indicator" data-index="2"></span>
+        <span class="indicator" data-index="3"></span>
+        <span class="indicator" data-index="4"></span>
+      </div>
+    </section>
+
+    <!-- FINAL SUNSET FIELD SECTION -->
+    <section class="sunset-section" id="sunset">
+      <div class="fireflies-container" id="fireflies"></div>
+      
+      <div class="sunset-content">
+        <div class="sunset-teddy-container">
+          <img src="assets/teddy_hug.png" alt="Teddy holding a giant heart" class="sunset-teddy breathing">
+          <div class="sunset-heart">❤️</div>
+        </div>
+
+        <div class="final-letter glassmorphism">
+          <h2 class="final-greeting">My Promise to You...</h2>
+          <p class="final-text">
+             No matter how heavy life feels, you will never have to face it alone.
+Main hamesha yahin rahunga, quietly and consistently tumhare saath.
+
+I will never raise my voice on you, no matter what.
+Aur main hamesha try karunga to treat you with more care, sabr aur respect , and ill always try to treat you better than papa ji .
+
+Jab bhi tum low feel karo, you can talk to me anytime — im here , bas sunne ke liye aur tumhe thoda calm karne ke liye.
+i wont let you sleep with a heavy heart samjhi and please dont think your troubling me or being a burden mujhe sachi acha  lagta hai jab tum mujhpe hakh jatati ho , toh bindass hukum karo hehe samjhi.
+
+          </p>
+          <span class="final-signature"> </span>
+        </div>
+
+        <button id="final-hug-btn" class="btn-primary final-btn pulse">
+          <span>Give a Real Warm Hug</span>
+          <span class="btn-icon">🧸</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- EMERGENCY COZY MODE CONTROLLER -->
+  <div class="emergency-trigger-container">
+    <button id="cozy-trigger-btn" class="cozy-fab" aria-label="Press when sad">
+      <span class="fab-icon">💗</span>
+      <span class="fab-label">Press when sad</span>
+    </button>
+  </div>
+
+  <!-- EMERGENCY COZY MODE OVERLAY -->
+  <div id="cozy-overlay" class="cozy-overlay-screen hidden">
+    <div class="cozy-bg-lights">
+      <div class="cozy-light yellow-light"></div>
+      <div class="cozy-light peach-light"></div>
+    </div>
+    
+    <div class="rain-window">
+      <div class="rain-droplets"></div>
+    </div>
+
+    <div class="cozy-content">
+      <button class="close-cozy-btn" aria-label="Close Cozy Mode">
+        <i data-lucide="x"></i>
+        <span>Return to Garden</span>
+      </button>
+
+      <div class="cozy-teddy-card glassmorphism">
+        <img src="assets/teddy_blanket.png" alt="Teddy Bear cozy under a knit blanket" class="cozy-teddy-img pulse">
+        <div class="fireplace-glow">🔥</div>
+      </div>
+
+      <div class="cozy-messages-container">
+        <div class="cozy-msg active">Shhh... take a deep breath. Can you hear the soft rain outside? 🌧️</div>
+        <div class="cozy-msg">You don't have to do anything right now. You don't have to worry about tomorrow. ☁️</div>
+        <div class="cozy-msg">Just take a deep breathe  and mujhe yaad kar lena hehe. ☕</div>
+        <div class="cozy-msg">You are safe here , i will be here to listen and handle you. Just rest. 🧸</div>
+        <div class="cozy-msg">I really care so deeply for my lambu. Everything is going to be alright, samjhi bondhuuu. 💖</div>
+      </div>
+
+      <div class="cozy-navigation-controls">
+        <button class="cozy-nav-btn prev-msg" disabled><i data-lucide="arrow-left"></i></button>
+        <span class="cozy-msg-counter">1 / 5</span>
+        <button class="cozy-nav-btn next-msg"><i data-lucide="arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL SCREEN INTERACTIVE TEDDY HUG POPUP -->
+  <div id="hug-popup-overlay" class="hug-popup hidden">
+    <div class="hug-hearts-container"></div>
+    <div class="hug-card glassmorphism animate-pop-in">
+      <img src="assets/teddy_hug.png" alt="Big hugging Teddy Bear" class="hug-teddy-img">
+      <h3 class="hug-title">HUUUUUUG! 🧸❤️</h3>
+      <p class="hug-message">"I'm hugging you so tightly until you smile! Feel the warmth, let go of the sadness, and remember how incredible  ."</p>
+      <button id="close-hug-popup-btn" class="btn-primary">
+        <span>click here if ur fine now hehe </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Application Logic Script -->
+  <script src="app.js"></script>
+</body>
+</html>

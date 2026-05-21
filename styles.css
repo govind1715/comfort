@@ -1,0 +1,1662 @@
+/* ==========================================================================
+   DESIGN TOKENS & ROOT VARIABLES
+   ========================================================================== */
+:root {
+  --color-pink-light: #fff0f3;
+  --color-pink-soft: #ffe5ec;
+  --color-pink-medium: #ffc2d1;
+  --color-pink-dark: #ff8fa3;
+  
+  --color-cream: #fffaf0;
+  --color-peach: #ffe8d6;
+  --color-lavender: #f0effa;
+  --color-lavender-dark: #d8d6fc;
+  
+  --color-tulip-pink: #ff8fa3;
+  --color-tulip-peach: #ffb3c0;
+  --color-tulip-lavender: #c5c4e8;
+  --color-tulip-rose: #ff758f;
+  --color-tulip-red: #ff597b;
+  --color-tulip-cream: #fef3c7;
+
+  --color-text-dark: #5c4e4e;
+  --color-text-muted: #857272;
+  --color-white: #ffffff;
+  
+  /* Cozy Night Mode Tokens */
+  --cozy-bg: #221a24;
+  --cozy-card-bg: rgba(45, 32, 48, 0.65);
+  --cozy-text: #ffeef2;
+  --cozy-gold: #fdd85d;
+  --cozy-peach: #fca889;
+  
+  --font-cute: 'Quicksand', 'Nunito', sans-serif;
+  --font-handwritten: 'Pacifico', cursive;
+  --font-body: 'Poppins', sans-serif;
+  
+  --shadow-soft: 0 10px 30px rgba(255, 179, 193, 0.2);
+  --shadow-medium: 0 15px 40px rgba(255, 143, 163, 0.25);
+  --shadow-glass: 0 8px 32px 0 rgba(255, 179, 193, 0.15);
+  --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-dark);
+  background-color: var(--color-pink-light);
+  background-image: 
+    linear-gradient(rgba(255, 240, 243, 0.7), rgba(255, 250, 240, 0.8)),
+    url('assets/dreamy_clouds.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-cute);
+  font-weight: 700;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Particle Canvas (floating hearts, sparkles) */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ==========================================================================
+   GLOBAL UTILITIES & BUTTONS
+   ========================================================================== */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 28px;
+  box-shadow: var(--shadow-glass);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--color-pink-dark) 0%, #ff758f 100%);
+  color: var(--color-white);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: var(--font-cute);
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition-smooth);
+  outline: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(255, 89, 123, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+}
+
+.section-badge {
+  display: inline-block;
+  background: var(--color-pink-soft);
+  color: var(--color-pink-dark);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-family: var(--font-cute);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  border: 1px dashed rgba(255, 143, 163, 0.4);
+}
+
+.section-title {
+  font-size: 2.25rem;
+  color: var(--color-text-dark);
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.section-subtitle {
+  color: var(--color-text-muted);
+  font-weight: 300;
+  font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   AUDIO CONTROLS
+   ========================================================================== */
+.audio-control-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 200;
+}
+
+.audio-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 10px 16px;
+  border-radius: 30px;
+  font-family: var(--font-cute);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.audio-btn:hover {
+  background: var(--color-white);
+  transform: translateY(-2px);
+}
+
+.audio-btn.playing {
+  background: var(--color-pink-soft);
+  border-color: var(--color-pink-medium);
+  color: var(--color-pink-dark);
+}
+
+.audio-btn i {
+  width: 16px;
+  height: 16px;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 24px 60px;
+  overflow: hidden;
+}
+
+.clouds-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border-radius: 100px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
+}
+
+.cloud::before, .cloud::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud-1 {
+  width: 120px;
+  height: 40px;
+  top: 15%;
+  left: -100px;
+  animation: floatCloud1 45s linear infinite;
+}
+.cloud-1::before { width: 50px; height: 50px; top: -25px; left: 15px; }
+.cloud-1::after { width: 70px; height: 70px; top: -35px; right: 15px; }
+
+.cloud-2 {
+  width: 180px;
+  height: 50px;
+  top: 40%;
+  right: -200px;
+  animation: floatCloud2 55s linear infinite;
+  opacity: 0.8;
+}
+.cloud-2::before { width: 70px; height: 70px; top: -35px; left: 25px; }
+.cloud-2::after { width: 90px; height: 90px; top: -45px; right: 25px; }
+
+.cloud-3 {
+  width: 100px;
+  height: 35px;
+  top: 70%;
+  left: -120px;
+  animation: floatCloud1 35s linear infinite;
+  animation-delay: 15s;
+  opacity: 0.9;
+}
+.cloud-3::before { width: 40px; height: 40px; top: -20px; left: 12px; }
+.cloud-3::after { width: 55px; height: 55px; top: -27px; right: 12px; }
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.love-note-container {
+  flex: 1;
+  max-width: 500px;
+}
+
+.love-note {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 32px;
+  padding: 40px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+}
+
+.love-note::after {
+  content: '🌸';
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  font-size: 2rem;
+  animation: rotateSlow 8s linear infinite;
+}
+
+.note-tag {
+  font-family: var(--font-cute);
+  font-weight: 700;
+  color: var(--color-pink-dark);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.love-note-greeting {
+  font-family: var(--font-handwritten);
+  font-size: 2.75rem;
+  color: var(--color-pink-dark);
+  margin: 15px 0 20px;
+  transform: rotate(-2deg);
+}
+
+.love-note-body {
+  font-size: 1.05rem;
+  color: var(--color-text-dark);
+  margin-bottom: 25px;
+  line-height: 1.7;
+}
+
+.teddy-inline-container {
+  display: flex;
+  align-items: center;
+}
+
+.teddy-inline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-white);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(255, 179, 193, 0.1);
+  border: 1px solid var(--color-pink-soft);
+}
+
+.inline-teddy-hand {
+  animation: waveTeddy 2.5s infinite;
+  display: inline-block;
+  transform-origin: bottom right;
+}
+
+.hero-interactive {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.main-teddy-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.teddy-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(255, 179, 193, 0.25));
+  transition: transform 0.3s ease;
+}
+
+.breathing {
+  animation: teddyBreathe 4s ease-in-out infinite;
+}
+
+.sparkles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.star-sparkle {
+  position: absolute;
+  font-size: 1.5rem;
+  color: #ffda79;
+  animation: twinkle 2.5s infinite ease-in-out;
+}
+
+.star-sparkle:nth-child(2) {
+  animation-delay: 0.8s;
+  font-size: 1.2rem;
+}
+
+.star-sparkle:nth-child(3) {
+  animation-delay: 1.5s;
+  font-size: 1rem;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-muted);
+  font-family: var(--font-cute);
+  font-weight: 600;
+  font-size: 0.9rem;
+  z-index: 10;
+}
+
+.chevron-bounce {
+  animation: bounceDown 1.8s infinite;
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   TULIP GARDEN SECTION
+   ========================================================================== */
+.garden-section {
+  min-height: 100vh;
+  padding: 100px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.tulip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 20px;
+}
+
+.tulip-card {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 28px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.tulip-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--color-pink-soft);
+}
+
+.tulip-flower {
+  height: 160px;
+  width: 100px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.stem {
+  width: 6px;
+  height: 110px;
+  background: linear-gradient(to top, #7bc676, #9ccc65);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.leaves {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  height: 35px;
+}
+
+.leaves::before, .leaves::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  background: #9ccc65;
+  border-radius: 0 100px 0 100px;
+  transform-origin: bottom left;
+}
+
+.leaves::before {
+  left: 10px;
+  transform: rotate(-15deg);
+}
+
+.leaves::after {
+  right: -10px;
+  transform: scaleX(-1) rotate(-15deg);
+}
+
+/* Tulip Bloom Construction */
+.bloom {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 68px;
+  z-index: 2;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.petal {
+  position: absolute;
+  bottom: 0;
+  width: 38px;
+  height: 60px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transition: var(--transition-smooth);
+}
+
+.petal-center {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 64px;
+  z-index: 2;
+}
+
+.petal-left {
+  left: 2px;
+  transform-origin: bottom left;
+  transform: rotate(-15deg);
+  opacity: 0.9;
+  z-index: 3;
+}
+
+.petal-right {
+  right: 2px;
+  transform-origin: bottom right;
+  transform: rotate(15deg);
+  opacity: 0.9;
+  z-index: 3;
+}
+
+/* Tulip Colors */
+.tulip-pink .petal { background: var(--color-tulip-pink); }
+.tulip-pink .petal-center { background: #ff758f; }
+
+.tulip-peach .petal { background: var(--color-tulip-peach); }
+.tulip-peach .petal-center { background: #ffa2b2; }
+
+.tulip-lavender .petal { background: var(--color-tulip-lavender); }
+.tulip-lavender .petal-center { background: #b4b3e6; }
+
+.tulip-rose .petal { background: var(--color-tulip-rose); }
+.tulip-rose .petal-center { background: #ff5c7d; }
+
+.tulip-red .petal { background: var(--color-tulip-red); }
+.tulip-red .petal-center { background: #f7385e; }
+
+.tulip-cream .petal { background: var(--color-tulip-cream); }
+.tulip-cream .petal-center { background: #fef08a; }
+
+/* Interactive Blooming Animation */
+.tulip-card.bloomed .bloom {
+  transform: translateX(-50%) scale(1.15);
+}
+
+.tulip-card.bloomed .petal-left {
+  transform: rotate(-45deg);
+  background: var(--color-white) !important;
+  filter: brightness(1.05);
+}
+
+.tulip-card.bloomed .petal-right {
+  transform: rotate(45deg);
+  background: var(--color-white) !important;
+  filter: brightness(1.05);
+}
+
+.tulip-label {
+  font-family: var(--font-cute);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  background: var(--color-white);
+  padding: 4px 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  border: 1px solid rgba(255, 179, 193, 0.2);
+  transition: var(--transition-smooth);
+}
+
+.tulip-card.bloomed .tulip-label {
+  color: var(--color-pink-dark);
+  border-color: var(--color-pink-dark);
+  background: var(--color-pink-soft);
+  transform: scale(1.05);
+}
+
+/* Letter Modal Styles */
+.letter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 240, 243, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.4s ease;
+  padding: 20px;
+}
+
+.letter-modal.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.letter-content {
+  max-width: 500px;
+  width: 100%;
+  padding: 50px 40px 40px;
+  position: relative;
+  transform: scale(1) rotate(-1deg);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: #fffdf9;
+  border: 2px solid var(--color-pink-soft);
+  box-shadow: 0 25px 50px rgba(255, 143, 163, 0.2);
+}
+
+.letter-modal.hidden .letter-content {
+  transform: scale(0.8) rotate(3deg);
+}
+
+.close-letter-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--color-pink-soft);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-pink-dark);
+  transition: var(--transition-smooth);
+}
+
+.close-letter-btn:hover {
+  transform: rotate(90deg) scale(1.1);
+  background: var(--color-pink-dark);
+  color: var(--color-white);
+}
+
+.letter-body {
+  font-family: var(--font-cute);
+  font-size: 1.15rem;
+  color: var(--color-text-dark);
+  line-height: 1.8;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.letter-footer {
+  text-align: center;
+  font-family: var(--font-handwritten);
+  font-size: 1.35rem;
+  color: var(--color-pink-dark);
+  border-top: 1px dashed var(--color-pink-medium);
+  padding-top: 20px;
+}
+
+/* ==========================================================================
+   MEMORY STARS (NIGHT SKY)
+   ========================================================================== */
+.sky-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 100px 24px;
+  background: linear-gradient(to bottom, #1a0f2e 0%, #2f1b4e 50%, #462c75 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--cozy-text);
+}
+
+.sky-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+  background-size: 550px 550px, 350px 350px, 250px 250px;
+  background-position: 0 0, 40px 60px, 130px 270px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.sky-badge {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #fef08a !important;
+  border-color: rgba(254, 240, 138, 0.3) !important;
+}
+
+.sky-title {
+  color: var(--color-white);
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.sky-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sky-map {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 480px;
+  margin-top: 30px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.2);
+}
+
+.interactive-star {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.interactive-star::before {
+  content: '⭐';
+  font-size: 1.6rem;
+  color: #fff9e6;
+  text-shadow: 0 0 12px #fef08a, 0 0 25px #fef08a;
+  filter: drop-shadow(0 0 5px rgba(254, 240, 138, 0.8));
+  animation: pulseStar 3s infinite ease-in-out;
+}
+
+.interactive-star:hover {
+  transform: scale(1.3) rotate(15deg);
+}
+
+.interactive-star:hover::before {
+  color: #fef08a;
+  text-shadow: 0 0 20px #fef08a, 0 0 40px #f59e0b;
+}
+
+/* Star Placements */
+.star-1 { top: 20%; left: 15%; animation-delay: 0.2s; }
+.star-2 { top: 15%; right: 20%; animation-delay: 0.8s; }
+.star-3 { top: 40%; left: 45%; animation-delay: 1.5s; }
+.star-4 { top: 55%; left: 25%; animation-delay: 0.5s; }
+.star-5 { top: 65%; right: 28%; animation-delay: 2s; }
+.star-6 { top: 45%; right: 12%; animation-delay: 1.2s; }
+
+.interactive-star.clicked::before {
+  animation: starSpin 1.2s ease-in-out infinite;
+  color: #f59e0b;
+}
+
+/* Star Notes Display Box */
+.star-message-box {
+  width: 100%;
+  max-width: 600px;
+  padding: 24px 30px;
+  margin-top: 40px;
+  text-align: center;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.star-message-box.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+#star-message-text {
+  font-family: var(--font-cute);
+  font-size: 1.15rem;
+  color: #fef9c3;
+  line-height: 1.7;
+}
+
+.star-sparkle-mini {
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  font-size: 1.5rem;
+  animation: floatMini 2.5s infinite;
+}
+
+/* ==========================================================================
+   CAROUSEL SECTION: Reasons I Love You
+   ========================================================================== */
+.carousel-section {
+  min-height: 100vh;
+  padding: 100px 24px;
+  background: var(--color-pink-light);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-outer {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 520px;
+  margin-top: 30px;
+  perspective: 1000px;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+}
+
+.carousel-inner:active {
+  cursor: grabbing;
+}
+
+.polaroid-card {
+  position: absolute;
+  width: 320px;
+  height: 420px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(255, 143, 163, 0.15);
+  padding: 20px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 179, 193, 0.15);
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.6s ease;
+  user-select: none;
+  transform-style: preserve-3d;
+  pointer-events: none; /* Pointer events handled by carousel core */
+}
+
+/* Stitched Fabric/Polaroid Photos Aesthetics */
+.polaroid-pin {
+  position: absolute;
+  top: -12px;
+  font-size: 1.5rem;
+  z-index: 10;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.polaroid-photo {
+  width: 100%;
+  flex-grow: 1;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  color: var(--color-text-dark);
+  font-family: var(--font-cute);
+  font-weight: 600;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.02);
+  border: 2px dashed rgba(255, 143, 163, 0.25);
+  margin-bottom: 20px;
+}
+
+/* Cards colorful stitched textures */
+.text-card-1 { background-color: #fff5f6; }
+.text-card-2 { background-color: #f7f6fd; }
+.text-card-3 { background-color: #fffaf0; }
+.text-card-4 { background-color: #f0fdf4; }
+.text-card-5 { background-color: #f5f9ff; }
+
+.polaroid-heart {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  animation: heartbeat 2s infinite ease-in-out;
+}
+
+.polaroid-text {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.polaroid-caption {
+  font-family: var(--font-handwritten);
+  font-size: 1.45rem;
+  color: var(--color-pink-dark);
+  transform: rotate(-1.5deg);
+}
+
+/* Carousel Active & Layering Styles */
+.polaroid-card.active {
+  pointer-events: auto;
+  opacity: 1;
+  z-index: 5;
+  transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+}
+
+.polaroid-card.prev {
+  opacity: 0.7;
+  z-index: 3;
+  transform: translate3d(-30px, 0, -50px) scale(0.9) rotate(-6deg);
+}
+
+.polaroid-card.next {
+  opacity: 0.7;
+  z-index: 3;
+  transform: translate3d(30px, 0, -50px) scale(0.9) rotate(6deg);
+}
+
+.polaroid-card.hidden-left {
+  opacity: 0;
+  z-index: 1;
+  transform: translate3d(-200px, 20px, -150px) scale(0.8) rotate(-15deg);
+}
+
+.polaroid-card.hidden-right {
+  opacity: 0;
+  z-index: 1;
+  transform: translate3d(200px, 20px, -150px) scale(0.8) rotate(15deg);
+}
+
+.carousel-indicators {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-pink-medium);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.indicator.active {
+  width: 28px;
+  border-radius: 5px;
+  background: var(--color-pink-dark);
+}
+
+/* ==========================================================================
+   FINAL SUNSET SECTION
+   ========================================================================== */
+.sunset-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 120px 24px;
+  background: linear-gradient(to bottom, #ffe5ec 0%, #ffb3c1 40%, #ff8fa3 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fireflies-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.firefly {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fef08a;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 4px #fef08a);
+  animation: floatFirefly 8s infinite ease-in-out;
+  opacity: 0;
+}
+
+.sunset-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+.sunset-teddy-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+.sunset-teddy {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(255, 89, 123, 0.35));
+}
+
+.sunset-heart {
+  position: absolute;
+  bottom: 0px;
+  right: 15px;
+  font-size: 3.5rem;
+  animation: heartbeat 1.5s infinite ease-in-out;
+}
+
+.final-letter {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 40px;
+  border-radius: 36px;
+  box-shadow: 0 20px 50px rgba(255, 89, 123, 0.25);
+  transform: rotate(1deg);
+}
+
+.final-greeting {
+  font-family: var(--font-handwritten);
+  font-size: 2.25rem;
+  color: var(--color-text-dark);
+  margin-bottom: 20px;
+}
+
+.final-text {
+  font-family: var(--font-cute);
+  font-size: 1.25rem;
+  color: var(--color-text-dark);
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.final-signature {
+  display: block;
+  font-family: var(--font-handwritten);
+  font-size: 1.5rem;
+  color: var(--color-pink-dark);
+  transform: rotate(-1deg);
+}
+
+.final-btn {
+  background: linear-gradient(135deg, #f72585 0%, #ff597b 100%);
+  animation: finalPulse 2.5s infinite;
+}
+
+/* ==========================================================================
+   EMERGENCY COZY MODE (SADNESS EMERGENCY)
+   ========================================================================== */
+.emergency-trigger-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 150;
+}
+
+.cozy-fab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-pink-medium);
+  padding: 14px 24px;
+  border-radius: 40px;
+  font-family: var(--font-cute);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-pink-dark);
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255, 143, 163, 0.2);
+  transition: var(--transition-smooth);
+}
+
+.cozy-fab:hover {
+  transform: translateY(-4px) scale(1.06);
+  background: var(--color-pink-soft);
+  box-shadow: 0 15px 30px rgba(255, 89, 123, 0.3);
+}
+
+.fab-icon {
+  font-size: 1.4rem;
+  animation: heartbeat 1.5s infinite;
+}
+
+/* Cozy Screen Overlay styles */
+.cozy-overlay-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--cozy-bg);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  overflow-y: auto;
+  padding: 40px 24px;
+}
+
+.cozy-overlay-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(1.05);
+}
+
+.cozy-bg-lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.cozy-light {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.25;
+}
+
+.yellow-light {
+  width: 400px;
+  height: 400px;
+  background: var(--cozy-gold);
+  top: -100px;
+  right: -50px;
+  animation: fireGlow 10s infinite alternate ease-in-out;
+}
+
+.peach-light {
+  width: 450px;
+  height: 450px;
+  background: var(--cozy-peach);
+  bottom: -150px;
+  left: -50px;
+  animation: fireGlow 12s infinite alternate-reverse ease-in-out;
+}
+
+/* Rain Ambient droplets overlay */
+.rain-window {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.15;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.rain-droplets {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.2));
+  /* rain animation drawn in canvas/JS */
+}
+
+.cozy-content {
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+}
+
+.close-cozy-btn {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--cozy-text);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: var(--font-cute);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.close-cozy-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.close-cozy-btn i {
+  width: 16px;
+  height: 16px;
+}
+
+.cozy-teddy-card {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.cozy-teddy-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+.fireplace-glow {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 2.2rem;
+  animation: fireplaceSparkle 2s infinite ease-in-out;
+}
+
+.cozy-messages-container {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cozy-msg {
+  display: none;
+  font-family: var(--font-cute);
+  font-size: 1.35rem;
+  color: var(--cozy-text);
+  line-height: 1.8;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  animation: cozyFadeIn 0.8s forwards ease;
+}
+
+.cozy-msg.active {
+  display: block;
+}
+
+.cozy-navigation-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cozy-nav-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--cozy-text);
+  transition: var(--transition-smooth);
+}
+
+.cozy-nav-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.cozy-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cozy-msg-counter {
+  font-family: var(--font-cute);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   VIRTUAL TEDDY HUG POPUP SCREEN
+   ========================================================================== */
+.hug-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 600;
+  background: rgba(255, 240, 243, 0.4);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.5s ease;
+}
+
+.hug-popup.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.hug-hearts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hug-card {
+  max-width: 440px;
+  width: 100%;
+  padding: 40px;
+  text-align: center;
+  background: #ffffff;
+  border: 2px solid var(--color-pink-soft);
+  box-shadow: 0 30px 60px rgba(255, 143, 163, 0.3);
+}
+
+.hug-teddy-img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 25px;
+  filter: drop-shadow(0 8px 15px rgba(255, 143, 163, 0.2));
+  animation: hugTeddyStretch 3s infinite ease-in-out;
+}
+
+.hug-title {
+  font-family: var(--font-handwritten);
+  font-size: 2.25rem;
+  color: var(--color-pink-dark);
+  margin-bottom: 15px;
+}
+
+.hug-message {
+  font-family: var(--font-cute);
+  font-size: 1.1rem;
+  color: var(--color-text-dark);
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+/* ==========================================================================
+   ANIMATION KEYFRAMES
+   ========================================================================== */
+@keyframes floatCloud1 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 220px)); }
+}
+
+@keyframes floatCloud2 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100vw - 380px)); }
+}
+
+@keyframes teddyBreathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.02); }
+}
+
+@keyframes waveTeddy {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+
+@keyframes rotateSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.1) rotate(15deg); }
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@keyframes pulseStar {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(254, 240, 138, 0.8)); }
+  50% { filter: drop-shadow(0 0 18px rgba(254, 240, 138, 1)); }
+}
+
+@keyframes starSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes floatMini {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-5px) scale(1.15); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  40% { transform: scale(1.03); }
+  60% { transform: scale(1.15); }
+}
+
+@keyframes floatFirefly {
+  0%, 100% { transform: translate(0, 0) scale(0.8); opacity: 0; }
+  50% { transform: translate(var(--dx, 30px), var(--dy, -50px)) scale(1.2); opacity: 0.8; }
+}
+
+@keyframes finalPulse {
+  0%, 100% { box-shadow: 0 15px 30px rgba(247, 37, 133, 0.3); }
+  50% { box-shadow: 0 25px 45px rgba(247, 37, 133, 0.55); }
+}
+
+@keyframes fireGlow {
+  0% { opacity: 0.15; transform: scale(0.9); }
+  100% { opacity: 0.3; transform: scale(1.15); }
+}
+
+@keyframes fireplaceSparkle {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 10px #f59e0b); }
+}
+
+@keyframes cozyFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hugTeddyStretch {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.06) translateY(-5px); }
+}
+
+.animate-pop-in {
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   MOBILE-FIRST RESPONSIVENESS & ADAPTABILITY
+   ========================================================================== */
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column-reverse;
+    gap: 40px;
+    text-align: center;
+  }
+  
+  .love-note-container {
+    max-width: 100%;
+  }
+
+  .love-note {
+    padding: 30px 20px;
+  }
+  
+  .love-note-greeting {
+    font-size: 2.3rem;
+  }
+  
+  .main-teddy-container {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .sky-map {
+    height: 400px;
+  }
+  
+  .interactive-star::before {
+    font-size: 1.4rem;
+  }
+  
+  .section-title {
+    font-size: 1.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .hero-section {
+    padding-top: 80px;
+  }
+
+  .love-note-greeting {
+    font-size: 2rem;
+  }
+
+  .love-note-body {
+    font-size: 0.95rem;
+  }
+
+  .btn-primary {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  .tulip-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .sky-map {
+    height: 340px;
+  }
+
+  .star-message-box {
+    padding: 16px 20px;
+  }
+
+  #star-message-text {
+    font-size: 1rem;
+  }
+
+  .carousel-outer {
+    max-width: 280px;
+    height: 440px;
+  }
+
+  .polaroid-card {
+    width: 260px;
+    height: 350px;
+    padding: 15px 15px 20px;
+  }
+
+  .polaroid-photo {
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  .polaroid-text {
+    font-size: 0.88rem;
+  }
+
+  .polaroid-caption {
+    font-size: 1.2rem;
+  }
+
+  .final-letter {
+    padding: 24px 20px;
+  }
+
+  .final-text {
+    font-size: 1.05rem;
+  }
+
+  .cozy-teddy-card {
+    width: 180px;
+    height: 180px;
+  }
+
+  .cozy-msg {
+    font-size: 1.1rem;
+  }
+
+  .cozy-fab {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+  }
+
+  .audio-control-container {
+    top: 15px;
+    right: 15px;
+  }
+  
+  .audio-btn span {
+    display: none; /* Hide music text on very small viewports */
+  }
+}
